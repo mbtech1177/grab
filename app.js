@@ -109,29 +109,30 @@ request.get({
 									callback();
 								});
 								}
-								}, 1000);
+								}, 2000);
 							});
 							callback();
 						} 
 						else {
-						        console.log('error:', error2);
+						        console.log('error:', 'tps');
 						        callback();
 						      } 
 					});
-				}, 10000);
+				}, 20000);
 				});
 
 				 callback();
 			}
 				else {
-				        console.log('error:', error1);
+				        console.log('error:', 'kelurahan');
 				        callback()
 				      } 
 			});
 		}, 1000);
 		});
+		 console.log('selesai');
 	}
 	else {
-        console.log('error:', error);
+        console.log('error:', 'kecamatan');
       }  
 });
