@@ -1,0 +1,18 @@
+{
+  "name": "grab",
+  "version": "1.0.0",
+  "description": "grab data new",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "oke"
+  ],
+  "author": "Mr. K",
+  "license": "ISC",
+  "dependencies": {
+    "delay": "^4.1.0",
+    "mongoose": "^5.3.12"
+  }
+}
