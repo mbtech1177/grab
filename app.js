@@ -49,7 +49,7 @@ request.get({
 		//var aaData = "aaData";
 		 var data = JSON.parse(body);
 		 dataKota = data.aaData;
-		 async.eachSeries(dataKota, function(dataKota, callback){
+		 async.eachSeries(dataKota, function(dataKota, callback1){
 		 	setTimeout(function(){
 			dataKecamatan = dataKota.namaKecamatan;
 			url1 = 'https://infopemilu.kpu.go.id/pilkada2018/pemilih/dpt/1/JAWA TENGAH/KOTA SURAKARTA/'+dataKecamatan+'/listDps.json?_='+date;
@@ -64,7 +64,7 @@ request.get({
 				 var data1 = JSON.parse(body1);
 				 //console.log(data1);
 				 data1 = data1.aaData;
-				async.eachSeries(data1, function(data1, callback){
+				async.eachSeries(data1, function(data1, callback2){
 					setTimeout(function(){
 					dataKelurahan = data1.namaKelurahan;
 					request.get({
@@ -76,7 +76,7 @@ request.get({
 						if (!error2 && IsJsonString(body2) == true) {
 						var data2 = JSON.parse(body2);
 						data2 = data2.aaData;
-							async.eachSeries(data2, function(data2, callback){
+							async.eachSeries(data2, function(data2, callback3){
 								setTimeout(function(){
 								if (data2.tps) {
 								dataTps = data2.tps;
@@ -87,7 +87,7 @@ request.get({
 									if (!error2 && IsJsonString(body3) == true) {
 										var data3 = JSON.parse(body3);
 										data3 = data3.aaData;
-										async.forEach(data3, function(data3, callback){
+										async.forEach(data3, function(data3, callback4){
 											data3['kelurahan'] = dataKelurahan;
 
 											data3['kecamatan'] = dataKecamatan;
@@ -102,35 +102,36 @@ request.get({
 											});
 											console.log(data3);
 
-											callback();
+											callback4();
 										});
 									}
 									//console.log(body3);
-									callback();
+									callback3();
 								});
 								}
 								}, 2000);
 							});
-							callback();
+							callback2();
 						} 
 						else {
 						        console.log('error:', 'tps');
-						        callback();
+						        callback2();
 						      } 
 					});
 				}, 20000);
 				});
 
-				 callback();
+				 callback1();
 			}
 				else {
 				        console.log('error:', 'kelurahan');
-				        callback()
+				        callback1()
 				      } 
 			});
+
+		 console.log('selesai');
 		}, 1000);
 		});
-		 console.log('selesai');
 	}
 	else {
         console.log('error:', 'kecamatan');
