@@ -36,7 +36,8 @@ function IsJsonString(str) {
     }
     return true;
 }
-
+var provinsi = "JAWA TENGAH";
+var kota 	 = "SURAKARTA";
 //var url = 'https://infopemilu.kpu.go.id/pilkada2018/pemilih/dpt/1/listNasional.json?_='+date;
 //console.log(url);
 request.get({
@@ -91,6 +92,10 @@ request.get({
 											data3['kelurahan'] = dataKelurahan;
 
 											data3['kecamatan'] = dataKecamatan;
+
+											data3['kota'] = kota;
+
+											data3['provinsi'] = provinsi;
 
 											data3['tanggalLahir'] = data3['nik'].substr(6,6);
 
