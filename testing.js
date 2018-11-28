@@ -205,11 +205,11 @@ function loopKelurahan(data){
     				console.log('Berhasil simpan Kelurahan')
     			})
 			//setTimeout(function(){
-				 for (var m = kelurahan.aaData[l]['jmlTps']; m > 0; l--) {
-				// 	setTimeout(function(){
-	     				cariDpt(kelurahan.aaData[l]['namaPropinsi'], kelurahan.aaData[l]['namaKabKota'], kelurahan.aaData[l]['namaKecamatan'], kelurahan.aaData[l]['namaKelurahan'], m)
-	   //  			}, 1000);
-	    		}
+	// 			 for (var m = kelurahan.aaData[l]['jmlTps']; m > 0; l--) {
+	// 			// 	setTimeout(function(){
+	//      				cariDpt(kelurahan.aaData[l]['namaPropinsi'], kelurahan.aaData[l]['namaKabKota'], kelurahan.aaData[l]['namaKecamatan'], kelurahan.aaData[l]['namaKelurahan'], m)
+	//    //  			}, 1000);
+	//     		}
 	   // 			console.log(kelurahan.aaData[l])
     		//}, 2000);
     	}
