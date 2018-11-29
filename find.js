@@ -36,7 +36,7 @@ function getOne(){
 	query.exec(function (err, data) {
 	  if (err) console.log(err);
 	  //data = JSON.parse(data)
-	  //oke = data.toObject({getters: true})
+	  oke = data.toObject({getters: true})
 	  console.log(oke);
 	  for (var i = oke.jmlTps; i > 0; i--) {
 	  	cariDpt(oke.namaPropinsi, oke.namaKabKota, oke.namaKecamatan, oke.namaKelurahan, i)
@@ -51,15 +51,8 @@ fetch('https://infopemilu.kpu.go.id/pilkada2018/pemilih/dpt/1/'+provinsi+'/'+kot
         method: 'get',
         headers: { Cookie: "_ga=GA1.3.1275283654.1542587633; _gid=GA1.3.2036981340.1542710926;", 'Content-Type': 'application/json' },
     })
-    .then(resp => {
-		let text = res.text();
-		if (resp.status >= 200 && resp.status < 300) {
-			loopDpt(provinsi, kota, kecamatan, kelurahan, text);
-		  } else {
-			return text.then(Promise.reject.bind(Promise));
-		  }
-	})
-    //.then(body => loopDpt(provinsi, kota, kecamatan, kelurahan, body))
+    .then(resp => resp.text())
+    .then(body => loopDpt(provinsi, kota, kecamatan, kelurahan, body))
     .catch(err => {console.error(err);
     	return});
 }
@@ -88,8 +81,9 @@ function loopDpt(provinsi, kota, kecamatan, kelurahan, data){
 		}
 		Grab.create(pemilih, function(error){
     		console.log('Berhasil simpan Grab')
-	 		console.log(pemilih)
-    	})
+	 	 	console.log(pemilih)
+		})
+		callback();
 	 })
     }
 }
@@ -103,5 +97,16 @@ function IsJsonString(str) {
     return true;
 }
 
-
+setInterval(() => {
 getOne()
+}, 4000);
+
+
+// {
+// 	let text = resp.text();
+// 	if (resp.status >= 200 && resp.status < 300) {
+// 		loopDpt(provinsi, kota, kecamatan, kelurahan, text);
+// 	  } else {
+// 		return text.then(Promise.reject.bind(Promise));
+// 	  }
+// }
