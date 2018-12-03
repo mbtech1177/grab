@@ -32,25 +32,13 @@ function getOne(){
       nik = oke.nik.substr(0,12);
       id = oke._id
       console.log(id)
-	   for (var i = 1; i < 20; i++) {
+	   for (var i = 1; i <= 20; i++) {
 	//   //	cariDpt(oke.namaPropinsi, oke.namaKabKota, oke.namaKecamatan, oke.namaKelurahan, i)
         ending = pad(i, 4, 0);
         nikKum = nik+ending
         console.log(nikKum)
-        //cariNik(oke.nama, nikKum)
-         if (nikKum == 3372024807540003) {
-        //     //Grab.update({nik: nik, nama : oke.nama},{$set : {nikFull : nikKum}})
-        //     // data.credentials.nikFull = nikKum
-        //     // data.save()
-        //     return
-            data.nikKum = nikKum
-            data.save(function(err) {
-                if (err) throw err;
-                
-                console.log('Author updated successfully');
-                return
-            });
-         }
+        cariNik(oke.nama, nikKum)
+       
 	   }
 	})
 	//query.update({ ambil : 'sudah' })
@@ -75,16 +63,29 @@ fetch('https://infopemilu.kpu.go.id/pilkada2018/pemilih/dpt/1/hasil-cari/resultD
 }
 
 function findNama(nama, nik, text){
-    data = JSON.parse(text)
-    aaData = data.aaData
-    if(aaData.length > 0){
-    console.log(aaData[0])
-    name = aaData[0].nama
-    if(nama == name){
-        nika = aaData[0].nik
-        console.log(nik+' '+nika+' '+nama)
-        Grab.findOneAndUpdate({nik : nika, nama: nama}, {nikFull : nik})
+    if (IsJsonString(text) == false) {
+    		
+        console.log(text);
+        Errors.create({error: text}, function(error){
+            console.log(error)
+        })
     }
+    else{
+        data = JSON.parse(text)
+        aaData = data.aaData
+        if(aaData.length > 0){
+            console.log(aaData[0])
+            name = aaData[0].nama
+            if(nama == name){
+                nika = aaData[0].nik
+                console.log(nik+' '+nika+' '+nama)
+                simpan = Grab.findOneAndUpdate({nik : nika, nama: nama}, {$set : {nikFull : nik}})
+                simpan.exec(function(err1, data1){
+                    if (err1) console.log(err1);
+                    console.log('Berhasil simpan')
+                })
+            }
+        }
     }
 }
 
@@ -119,16 +120,16 @@ function findNama(nama, nik, text){
 //     }
 // }
 
-// function IsJsonString(str) {
-//     try {
-//         JSON.parse(str);
-//     } catch (e) {
-//         return false;
-//     }
-//     return true;
-// }
+function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
 
-//setInterval(() => {
+setInterval(() => {
 getOne()
-//}, 1000);
+}, 100);
 

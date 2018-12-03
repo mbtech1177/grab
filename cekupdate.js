@@ -23,28 +23,37 @@ var Grab = mongoose.model('Grab', LogSchema);
 var date = Math.floor(new Date() / 1000)
 
 function getOne(){
-    Grab.findOne({ nikFull : null}, function(err, data){
+   joss =  Grab.findOne({ nikFull : null});
+   joss.exec(function(err, data){
     if (err) console.log(err);
-	  oke = data.toObject({getters: true})
-      console.log(oke);
-      nik = oke.nik.substr(0,12);
-      id = oke._id
-      console.log(id)
-	   for (var i = 1; i < 20; i++) {
-        ending = pad(i, 4, 0);
-        nikKum = nik+ending
-        console.log(nikKum)
-         if (nikKum == nik+0003) {
-            data.nikKum = nikKum
-            data.save(function(err) {
-                if (err) throw err;
-                Grab.update({nik : nik, nama : oke.nama},{$set :{nikNew : nikKum }})
-                console.log('Author updated successfully');
-                return
-            });
-         }
-	   }
-	})
+    oke = data.toObject({getters: true})
+        update = Grab.updateOne({nik : oke.nik, nama : oke.nama},{$set:{nikFull : 'sudah'}})
+        update.exec(function(error, data1){
+            console.log('Berhasil simpan '+oke.nama)
+        })
+   })
+    // Grab.findOne({ nikFull : null}, function(err, data){
+    // if (err) console.log(err);
+	//   oke = data.toObject({getters: true})
+    //   console.log(oke);
+    //   nik = oke.nik.substr(0,12);
+    //   id = oke._id
+    //   console.log(id)
+	//    for (var i = 1; i < 20; i++) {
+    //     ending = pad(i, 4, 0);
+    //     nikKum = nik+ending
+    //     console.log(nikKum)
+    //      if (nikKum == nik+0003) {
+    //         data.nikKum = nikKum
+    //         data.save(function(err) {
+    //             if (err) throw err;
+    //             Grab.update({nik : nik, nama : oke.nama},{$set :{nikNew : nikKum }})
+    //             console.log('Author updated successfully');
+    //             return
+    //         });
+    //      }
+	//    }
+	// })
 }
 
 function pad(n, width, z) {
@@ -52,5 +61,6 @@ function pad(n, width, z) {
     n = n + '';
     return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
   }
-
+  setInterval(() => {
 getOne()
+  }, 1000)
