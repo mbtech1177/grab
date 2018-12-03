@@ -36,14 +36,21 @@ function getOne(){
 	//   //	cariDpt(oke.namaPropinsi, oke.namaKabKota, oke.namaKecamatan, oke.namaKelurahan, i)
         ending = pad(i, 4, 0);
         nikKum = nik+ending
-        //console.log(nikKum)
-        cariNik(oke.nama, nikKum)
-        // if (nikKum == 3372024807540003) {
+        console.log(nikKum)
+        //cariNik(oke.nama, nikKum)
+         if (nikKum == 3372024807540003) {
         //     //Grab.update({nik: nik, nama : oke.nama},{$set : {nikFull : nikKum}})
         //     // data.credentials.nikFull = nikKum
         //     // data.save()
         //     return
-        // }
+            data.nikKum = nikKum
+            data.save(function(err) {
+                if (err) throw err;
+                
+                console.log('Author updated successfully');
+                return
+            });
+         }
 	   }
 	})
 	//query.update({ ambil : 'sudah' })
