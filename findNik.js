@@ -84,10 +84,10 @@ function findNama(nama, nik, text){
             if(nama == name){
                 nika = aaData[0].nik
                 console.log(nik+' '+nika+' '+nama)
-                simpan = Grab.findOneAndUpdate({nik : nika, nama: nama}, {$set : {nikFull : nik}})
+                simpan = Grab.updateOne({nik : nika, nama: nama}, {$set : {nikFull : nik}})
                 simpan.exec(function(err1, data1){
                     if (err1) console.log(err1);
-                    console.log('Berhasil simpan')
+                    console.log(data1)
                 })
             }
         }
