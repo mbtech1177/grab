@@ -40,7 +40,7 @@ function getOne(){
         cariNik(oke.nama, nikKum)
        
        }
-       simpan1 = Grab.findOneAndUpdate({nik : oke.nik, nama: oke.nama}, {$set : {nikFull : oke.nik}})
+       simpan1 = Grab.updateOne({nik : oke.nik, nama: oke.nama}, {$set : {nikFull : oke.nik}})
                 simpan1.exec(function(err1, data1){
                     if (err1) console.log(err1);
                     console.log('Berhasil simpan')
