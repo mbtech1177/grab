@@ -87,4 +87,4 @@ function pad(n, width, z) {
 
   setInterval(() => {
 getOne()
-  }, 400)
+  }, 750)
