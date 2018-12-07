@@ -136,9 +136,9 @@ function loopProvinsi(data){
     	else{
     		provinsi = JSON.parse(data)
     		for (var i = provinsi.aaData.length - 1; i >= 0; i--) {
-    			Propinsi.create(provinsi.aaData[i], function(error){
-    				console.log('Berhasil simpan Propinsi')
-    			})
+    			// Propinsi.create(provinsi.aaData[i], function(error){
+    			// 	console.log('Berhasil simpan Propinsi')
+    			// })
     			cariKota(provinsi.aaData[i]['namaWilayah']);
     		}
     	}
