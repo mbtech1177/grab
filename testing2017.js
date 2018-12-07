@@ -155,6 +155,7 @@ function loopKota(data){
 	for (var j = kota.aaData.length - 1; j >= 0; j--) {
     	cariKecamatan(kota.aaData[j]['namaPropinsi'], kota.aaData[j]['namaKabKota'])
     			Kota.create(kota.aaData[j], function(error){
+					if(error) console.log(error)
     				console.log('Berhasil simpan Kota')
     			})
     }
@@ -173,6 +174,7 @@ function loopKecamatan(data){
 						//console.log(kecamatan.aaData[k]['namaKecamatan'])
 
 		    			Kecamatan.create(kecamatan.aaData[k], function(error){
+							if(error) console.log(error)
 		    				console.log('Berhasil simpan Kecamatan')
 		    			})
 			    	cariKelurahan(kecamatan.aaData[k]['namaPropinsi'], kecamatan.aaData[k]['namaKabKota'], kecamatan.aaData[k]['namaKecamatan'])
@@ -202,7 +204,9 @@ function loopKelurahan(data){
 		for (var l = kelurahan.aaData.length - 1; l >= 0; l--) {
 
     			Kelurahan.create(kelurahan.aaData[l], function(error){
-    				console.log('Berhasil simpan Kelurahan')
+					if(error) console.log(error)
+					console.log('Berhasil simpan Kelurahan')
+					console.log(kelurahan)
     			})
 			//setTimeout(function(){
 	// 			 for (var m = kelurahan.aaData[l]['jmlTps']; m > 0; l--) {
