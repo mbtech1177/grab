@@ -45,7 +45,7 @@ fetch('https://pilkada2017.kpu.go.id/pemilih/dpt/1/'+provinsi+'/listDps.json?_='
     .then(res => res.text())
     .then(body => loopKota(body))
     .catch(err => {console.error(err);
-    	j--;
+    //	j--;
     	return});
 }
 
@@ -57,7 +57,7 @@ fetch('https://pilkada2017.kpu.go.id/pemilih/dpt/1/'+provinsi+'/'+kota+'/listDps
     .then(res => res.text())
     .then(body => loopKecamatan(body))
     .catch(err => {console.error(err);
-    	k--;
+    //	k--;
     	return});
 }
 
@@ -69,7 +69,7 @@ fetch('https://pilkada2017.kpu.go.id/pemilih/dpt/1/'+provinsi+'/'+kota+'/'+kecam
     .then(res => res.text())
     .then(body => loopKelurahan(body))
     .catch(err => {console.error(err);
-    	l--;
+    //	l--;
     	return});
 }
 
@@ -81,7 +81,7 @@ fetch('https://pilkada2017.kpu.go.id/pemilih/dpt/1/'+provinsi+'/'+kota+'/'+kecam
     .then(res => loopDpt(res))
     //.then(json => loopTps(json.aaData))
     .catch(err => {console.error(err);
-    	m--;
+    	//m--;
     	return});
 }
 
@@ -93,7 +93,7 @@ fetch('https://pilkada2017.kpu.go.id/pemilih/dpt/1/'+provinsi+'/'+kota+'/'+kecam
     .then(res => res.text())
     .then(body => loopDpt(body))
     .catch(err => {console.error(err);
-    	n--;
+    	//n--;
     	return});
 }
 
@@ -139,8 +139,10 @@ function loopProvinsi(data){
     			// Propinsi.create(provinsi.aaData[i], function(error){
     			// 	console.log('Berhasil simpan Propinsi')
 				// })
+				wilayah = provinsi.aaData[i]
+				console.log(wilayah.namaWilayah)
 				setInterval(()=>{
-				cariKota(provinsi.aaData[i]['namaWilayah']);
+				cariKota(wilayah.namaWilayah);
 				},100)
     		}
     	}
@@ -155,8 +157,9 @@ function loopKota(data){
 	else{
 		kota = JSON.parse(data)
 	for (var j = kota.aaData.length - 1; j >= 0; j--) {
+		kota2 = kota.aaData[j]
 		setInterval(()=>{
-    	cariKecamatan(kota.aaData[j]['namaPropinsi'], kota.aaData[j]['namaKabKota'])
+    	cariKecamatan(kota2.namaPropinsi, kota2.namaKabKota)
     			Kota.create(kota.aaData[j], function(error){
 					if(error) console.log(error)
     				console.log('Berhasil simpan Kota')
@@ -174,15 +177,16 @@ function loopKecamatan(data){
 	    		kecamatan = JSON.parse(data)
 				for (var k = kecamatan.aaData.length - 1; k >= 0; k--) {
 					setInterval(()=>{
-					if (kecamatan.aaData[k]['namaPropinsi']) {
+					kecamatan2 = kecamatan.aaData[k]
+					if (kecamatan2.namaPropinsi) {
 					//setTimeout(function(){
 						//console.log(kecamatan.aaData[k]['namaKecamatan'])
 
-		    			Kecamatan.create(kecamatan.aaData[k], function(error){
+		    			Kecamatan.create(kecamatan2, function(error){
 							if(error) console.log(error)
 		    				console.log('Berhasil simpan Kecamatan')
 		    			})
-			    	cariKelurahan(kecamatan.aaData[k]['namaPropinsi'], kecamatan.aaData[k]['namaKabKota'], kecamatan.aaData[k]['namaKecamatan'])
+			    	cariKelurahan(kecamatan2.namaPropinsi, kecamatan2.namaKabKota, kecamatan2.namaKecamatan)
 
 	    			//}, 2000);
 	    			}
@@ -208,8 +212,8 @@ function loopKelurahan(data){
     else{
     		kelurahan = JSON.parse(data)
 		for (var l = kelurahan.aaData.length - 1; l >= 0; l--) {
-
-    			Kelurahan.create(kelurahan.aaData[l], function(error){
+			kelurahan2 = kelurahan.aaData[l]
+    			Kelurahan.create(kelurahan2, function(error){
 					if(error) console.log(error)
 					console.log('Berhasil simpan Kelurahan')
     			})

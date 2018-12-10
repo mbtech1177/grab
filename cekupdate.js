@@ -30,7 +30,7 @@ var Grab = mongoose.model('Grab', LogSchema);
 var date = Math.floor(new Date() / 1000)
 
 function getOne(){
-Grab.findOne({ nikFull : null}, function(err, docs){
+Grab.findOne({ nikFull : null, provinsi: 'JAWA TENGAH'}, function(err, docs){
     if (err) console.log(err);
     oke = docs.toObject({getters: true})
     nik = oke.nik.substr(0,12);
