@@ -206,7 +206,6 @@ function loopKelurahan(data){
     			Kelurahan.create(kelurahan.aaData[l], function(error){
 					if(error) console.log(error)
 					console.log('Berhasil simpan Kelurahan')
-					console.log(kelurahan)
     			})
 			//setTimeout(function(){
 	// 			 for (var m = kelurahan.aaData[l]['jmlTps']; m > 0; l--) {
