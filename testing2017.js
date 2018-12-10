@@ -138,8 +138,10 @@ function loopProvinsi(data){
     		for (var i = provinsi.aaData.length - 1; i >= 0; i--) {
     			// Propinsi.create(provinsi.aaData[i], function(error){
     			// 	console.log('Berhasil simpan Propinsi')
-    			// })
-    			cariKota(provinsi.aaData[i]['namaWilayah']);
+				// })
+				setInterval(()=>{
+				cariKota(provinsi.aaData[i]['namaWilayah']);
+				},100)
     		}
     	}
     	//console.log(data.status)
@@ -153,11 +155,13 @@ function loopKota(data){
 	else{
 		kota = JSON.parse(data)
 	for (var j = kota.aaData.length - 1; j >= 0; j--) {
+		setInterval(()=>{
     	cariKecamatan(kota.aaData[j]['namaPropinsi'], kota.aaData[j]['namaKabKota'])
     			Kota.create(kota.aaData[j], function(error){
 					if(error) console.log(error)
     				console.log('Berhasil simpan Kota')
-    			})
+				})
+			},100)	
     }
     }
 }
@@ -169,6 +173,7 @@ function loopKecamatan(data){
 	    	else{
 	    		kecamatan = JSON.parse(data)
 				for (var k = kecamatan.aaData.length - 1; k >= 0; k--) {
+					setInterval(()=>{
 					if (kecamatan.aaData[k]['namaPropinsi']) {
 					//setTimeout(function(){
 						//console.log(kecamatan.aaData[k]['namaKecamatan'])
@@ -183,7 +188,8 @@ function loopKecamatan(data){
 	    			}
 	    			else{
 	    				console.log('gagal')
-	    			}
+					}
+				},100)
 		    	}
     		}
    //console.log(data)
